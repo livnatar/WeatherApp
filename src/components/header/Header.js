@@ -19,13 +19,15 @@
 //         </div>
 //     );
 // }
+
 import { Outlet } from "react-router";
 import AppTitle from './AppTitle';
 import NavigationBar from './NavigationBar';
+import { Container } from 'react-bootstrap';
 
 export default function Header(props) {
     return (
-        <div className="container-fluid p-0">
+        <>
             {/* Title Row Component */}
             <AppTitle />
 
@@ -33,9 +35,9 @@ export default function Header(props) {
             <NavigationBar />
 
             {/* Content Area */}
-            <div className="container mt-4">
+            <Container fluid className="mx-3 mt-3">
                 <Outlet />
-            </div>
-        </div>
+            </Container>
+        </>
     );
 }

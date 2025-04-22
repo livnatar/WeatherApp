@@ -3,25 +3,27 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 
 export default function NavigationBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container">
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/">Favorite Cities</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/AllCities">All Cities</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/About">About</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <Navbar bg="light" expand="md"> {/* Collapses on screens smaller than md (768px) */}
+            <Container fluid>
+
+                {/* This is the hamburger icon that appears when collapsed */}
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+                {/* Content that collapses into the hamburger menu on smaller screens */}
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="mx-3">
+                        <Nav.Item>
+                            <Link to="/" className="nav-link">Favorite Cities</Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Link to="/AllCities" className="nav-link">All Cities</Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Link to="/About" className="nav-link">About</Link>
+                        </Nav.Item>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 }
