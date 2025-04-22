@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import FavoriteCities from "./components/FavoriteCities";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
-import AllCities from "./components/AllCities";
+import AllCities from "./components/allCitiesPage/AllCities";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 
@@ -26,5 +26,6 @@ function App() {
         </>
     );
 }
+
 
 export default App;
