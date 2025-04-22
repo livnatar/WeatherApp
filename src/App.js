@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import FavoriteCities from "./components/FavoriteCities";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
