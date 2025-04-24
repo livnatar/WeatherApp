@@ -14,7 +14,7 @@ function FavoriteCities({cities}) {
             {favoriteCities.length > 0 ? (
                 <ul>
                     {favoriteCities.map(city => (
-                        <li key={city.name}> {city.name} {city.country} ></li> // add bootstrap button called get weather forecast
+                        <li key={city.name}> {city.name} {city.country}</li> // add bootstrap button called get weather forecast
                     ))}
                 </ul>
             ) : (

@@ -1,5 +1,5 @@
 import Header from "./components/header/Header";
-import FavoriteCities from "./components/FavoriteCities";
+import FavoriteCities from "./components/favoriteCities/FavoriteCities";
 import About from "./components/About";
 import NotFound from "./components/NotFound";
 import AllCities from "./components/allCitiesPage/AllCities";
