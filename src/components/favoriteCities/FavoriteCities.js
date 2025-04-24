@@ -1,24 +1,67 @@
 /**
- * A simple static component.
+ * A component for displaying favorite cities with alphabetical sorting and country filtering.
  * @returns {JSX.Element}
- * @constructor
  */
-function FavoriteCities({cities}) {
+import { useState } from 'react';
+import CountryFilter from './CountryFilter'; // Import the separate filter component
 
-    const favoriteCities = cities.filter(city => city.isFavorite);
+function FavoriteCities({cities}) {
+    const [selectedCountry, setSelectedCountry] = useState('');
+
+    // Get all favorite cities and sort them alphabetically by name
+    const favoriteCities = cities
+        .filter(city => city.isFavorite)
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+    // Extract unique countries from favorite cities for dropdown
+    const uniqueCountries = [...new Set(favoriteCities.map(city => city.country))];
+
+    // Filter cities by selected country
+    const filteredCities = selectedCountry
+        ? favoriteCities.filter(city => city.country === selectedCountry)
+        : favoriteCities;
+
+    // Handle country selection
+    const handleCountryChange = (e) => {
+        setSelectedCountry(e.target.value);
+    };
+
+    // Reset country filter
+    const handleReset = () => {
+        setSelectedCountry('');
+    };
 
     return (
         <div>
             <h2>Your Favorite Cities</h2>
 
-            {favoriteCities.length > 0 ? (
-                <ul>
-                    {favoriteCities.map(city => (
-                        <li key={city.name}> {city.name} {city.country}</li> // add bootstrap button called get weather forecast
+            {/* Using the separate CountryFilter component */}
+            <CountryFilter
+                countries={uniqueCountries}
+                selectedCountry={selectedCountry}
+                onSelectCountry={handleCountryChange}
+                onReset={handleReset}
+            />
+
+            {filteredCities.length > 0 ? (
+                <ul className="list-group mt-3">
+                    {filteredCities.map(city => (
+                        <li key={city.name} className="list-group-item d-flex justify-content-between align-items-center">
+                            <span>
+                                <strong>{city.name}</strong>, {city.country}
+                            </span>
+                            <button className="btn btn-outline-info btn-sm" onClick={() => alert(`Weather forecast for ${city.name} will be available soon!`)}>
+                                Get Weather Forecast
+                            </button>
+                        </li>
                     ))}
                 </ul>
             ) : (
-                <p>No favorite cities yet. Add some in the All Cities section!</p>
+                <p className="text-muted">
+                    {favoriteCities.length > 0
+                        ? "No cities match your filter. Try selecting a different country or reset the filter."
+                        : "No favorite cities yet. Add some in the All Cities section!"}
+                </p>
             )}
         </div>
     );
