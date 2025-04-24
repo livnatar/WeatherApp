@@ -1,19 +1,12 @@
 import { useState } from 'react';
+import CountriesDropdown from "./CountriesDropdown";
 
 function CityForm({ setCities, setShowForm }) {
-    const [formData, setFormData] = useState({
-        name: '',
-        country: '',
-        latitude: '',
-        longitude: '',
-    });
+    const [formData, setFormData] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name] : value
-        });
+        setFormData( values => ({ ...values, [name]: value }))
     };
 
     const handleSubmit = (e) => {
@@ -33,9 +26,9 @@ function CityForm({ setCities, setShowForm }) {
                 <input
                     type="text"
                     className="form-control"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                    id="cityName"
+                    name="cityName"
+                    value={formData.name || ""}
                     onChange={handleChange}
                     required
                 />
@@ -43,14 +36,8 @@ function CityForm({ setCities, setShowForm }) {
 
             <div className="mb-2">
                 <label htmlFor="country" className="form-label">Country</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="country"
-                    name="country"
-                    value={formData.country}
-                    onChange={handleChange}
-                    required
+                <CountriesDropdown
+                    handleChange={handleChange}
                 />
             </div>
 
@@ -63,7 +50,7 @@ function CityForm({ setCities, setShowForm }) {
                         className="form-control"
                         id="latitude"
                         name="latitude"
-                        value={formData.latitude}
+                        value={formData.latitude || ""}
                         onChange={handleChange}
                         required
                     />
@@ -77,7 +64,7 @@ function CityForm({ setCities, setShowForm }) {
                         className="form-control"
                         id="longitude"
                         name="longitude"
-                        value={formData.longitude}
+                        value={formData.longitude || ""}
                         onChange={handleChange}
                         required
                     />
@@ -101,3 +88,14 @@ function CityForm({ setCities, setShowForm }) {
 }
 
 export default CityForm;
+
+
+// {/*<input*/}
+// {/*    type="text"*/}
+// {/*    className="form-control"*/}
+// {/*    id="country"*/}
+// {/*    name="country"*/}
+// {/*    value={formData.country || ""}*/}
+// {/*    onChange={handleChange}*/}
+// {/*    required*/}
+// {/*/>*/}
