@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import {useState} from 'react';
+import CountriesDropdown from "./CountriesDropdown";
 
-function CityEditForm({ city, onSave, onCancel }) {
+function CityEditForm({city, onSave, onCancel}) {
     const [formData, setFormData] = useState({
         name: city.name,
         country: city.country,
@@ -9,10 +10,10 @@ function CityEditForm({ city, onSave, onCancel }) {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData({
             ...formData,
-            [name] : value
+            [name]: value
         });
     };
 
@@ -39,14 +40,10 @@ function CityEditForm({ city, onSave, onCancel }) {
 
                 <div className="mb-2">
                     <label htmlFor="country" className="form-label">Country</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="country"
-                        name="country"
+                    <CountriesDropdown
+                        handleChange={handleChange}
                         value={formData.country}
-                        onChange={handleChange}
-                        required
+                        id = "country"
                     />
                 </div>
 
@@ -98,3 +95,13 @@ function CityEditForm({ city, onSave, onCancel }) {
 }
 
 export default CityEditForm;
+
+// <input
+//     type="text"
+//     className="form-control"
+//     id="country"
+//     name="country"
+//     value={formData.country}
+//     onChange={handleChange}
+//     required
+// />
