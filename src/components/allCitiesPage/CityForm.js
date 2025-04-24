@@ -26,8 +26,8 @@ function CityForm({ setCities, setShowForm }) {
                 <input
                     type="text"
                     className="form-control"
-                    id="cityName"
-                    name="cityName"
+                    id="name"
+                    name="name"
                     value={formData.name || ""}
                     onChange={handleChange}
                     required

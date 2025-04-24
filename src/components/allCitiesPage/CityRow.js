@@ -8,7 +8,7 @@ function CityRow({city, onEdit, onDelete, onToggleFavorite}) {
     return (
         <div className="list-group-item d-flex justify-content-between align-items-center">
             <div>
-                <h5>{city.cityName}, {city.country}</h5>
+                <h5>{city.name}, {city.country}</h5>
                 <small>
                     Coordinates: {city.latitude}, {city.longitude}
                 </small>
