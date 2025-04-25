@@ -1,22 +1,41 @@
 import { useState } from 'react';
 import CountriesDropdown from "./CountriesDropdown";
+import {
+    validateCityName,
+    validateCountry,
+    validateLatitude,
+    validateLongitude,
+} from './ValidateForm';
 
-function CityForm({ setCities, setShowForm }) {
+function CityForm({ cities, setCities, setShowForm }) {
 
     const [formData, setFormData] = useState({});
     const [formValidity, setFormValidity] = useState({});
 
+    // const validators = {
+    //     name: value => value.trim() !== '',
+    //     country: value => value.trim() !== '',
+    //     latitude: value => !isNaN(value) && value >= -90 && value <= 90,
+    //     longitude: value => !isNaN(value) && value >= -180 && value <= 180,
+    // };
     const validators = {
-        name: value => value.trim() !== '',
-        country: value => value.trim() !== '',
-        latitude: value => !isNaN(value) && value >= -90 && value <= 90,
-        longitude: value => !isNaN(value) && value >= -180 && value <= 180,
+        name: value => validateCityName(value, cities),
+        country: validateCountry,
+        latitude: validateLatitude,
+        longitude: validateLongitude,
     };
 
+
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData( values => ({ ...values, [name]: value }))
+    //     handleValidate(name, value);
+    // };
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData( values => ({ ...values, [name]: value }))
-        handleValidate(name, value);
+        const trimmedValue = value.trimStart(); // optional but helps avoid leading spaces
+        setFormData(values => ({ ...values, [name]: trimmedValue }));
+        handleValidate(name, trimmedValue);
     };
 
     const handleValidate = (name, value) => {
@@ -76,7 +95,7 @@ function CityForm({ setCities, setShowForm }) {
                 <CountriesDropdown
                     handleChange={handleChange}
                     value={formData.country}
-                    isInvalid={formValidity.country}
+                    isValid={formValidity.country}
                     id="country"
                 />
             </div>
@@ -142,14 +161,3 @@ function CityForm({ setCities, setShowForm }) {
 }
 
 export default CityForm;
-
-
-// {/*<input*/}
-// {/*    type="text"*/}
-// {/*    className="form-control"*/}
-// {/*    id="country"*/}
-// {/*    name="country"*/}
-// {/*    value={formData.country || ""}*/}
-// {/*    onChange={handleChange}*/}
-// {/*    required*/}
-// {/*/>*/}

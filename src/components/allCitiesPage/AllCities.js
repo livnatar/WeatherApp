@@ -15,6 +15,7 @@ function AllCities({cities, setCities}) {
 
             { showForm ? (
                 <CityForm
+                    cities={cities}
                     setCities={setCities}
                     setShowForm={setShowForm}
                 />
