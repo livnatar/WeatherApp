@@ -33,7 +33,7 @@ function FavoriteCities({cities}) {
 
     return (
         <div>
-            <h2>Your Favorite Cities</h2>
+            <h1>Your Favorite Cities</h1>
 
             {/* Using the separate CountryFilter component */}
             <CountryFilter
