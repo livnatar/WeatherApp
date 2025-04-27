@@ -58,9 +58,7 @@ function FavoriteCities({cities}) {
                 </ul>
             ) : (
                 <p className="text-muted">
-                    {favoriteCities.length > 0
-                        ? "No cities match your filter. Try selecting a different country or reset the filter."
-                        : "No favorite cities yet. Add some in the All Cities section!"}
+                    "No favorite cities yet. Add some in the All Cities section!"
                 </p>
             )}
         </div>

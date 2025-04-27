@@ -9,19 +9,35 @@ import {useEffect, useState} from "react";
 
 function App() {
 
-    const [cities, setCities] = useState([]);
+    // const [cities, setCities] = useState([]);
+    //
+    // // Load cities from localStorage on component mount
+    // useEffect(() => {
+    //     const savedCities = localStorage.getItem('weatherCities');
+    //     if (savedCities) {
+    //         setCities(JSON.parse(savedCities));
+    //     }
+    // }, []);
 
-    // Load cities from localStorage on component mount
-    useEffect(() => {
-        const savedCities = localStorage.getItem('weatherCities');
-        if (savedCities) {
-            setCities(JSON.parse(savedCities));
+    // Initialize cities with an empty array - we'll load from localStorage first
+    const [cities, setCities] = useState(() => {
+        // This function runs only once during initial render
+        try {
+            const savedCities = localStorage.getItem('weatherCities');
+            return savedCities ? JSON.parse(savedCities) : [];
+        } catch (error) {
+            console.error("Failed to load cities from localStorage:", error);
+            return [];
         }
-    }, []);
+    });
 
     // Save cities to localStorage whenever the cities state changes
     useEffect(() => {
-        localStorage.setItem('weatherCities', JSON.stringify(cities));
+        try {
+            localStorage.setItem('weatherCities', JSON.stringify(cities));
+        } catch (error) {
+            console.error("Failed to save cities to localStorage:", error);
+        }
     }, [cities]);
 
 

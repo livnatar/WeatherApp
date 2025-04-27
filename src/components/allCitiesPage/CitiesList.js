@@ -25,11 +25,6 @@ function CitiesList({ cities, setCities }) {
         setCityToDelete(null);
     };
 
-    // const deleteCity = (cityId) => {
-    //     setCities(cities.filter(city => city.name !== cityId));
-    //     // add modal that asks if sure about deleting
-    // };
-
     const toggleFavorite = (cityId) => {
         setCities(cities.map(city =>
             city.name === cityId ? {...city, isFavorite: !city.isFavorite} : city
@@ -60,7 +55,6 @@ function CitiesList({ cities, setCities }) {
                                 key={city.name}
                                 city={city}
                                 cities = {cities}
-                                //cities = {[]}
                                 onSave={handleUpdateCity}
                                 onCancel={handleCancelEdit}
                             />
