@@ -8,14 +8,14 @@ export default function Header(props) {
     return (
         <>
             {/* Title Row Component */}
-            <AppTitle />
+            <AppTitle/>
 
             {/* Navigation Bar Component */}
-            <NavigationBar />
+            <NavigationBar/>
 
             {/* Content Area */}
             <Container fluid className="mx-3 mt-3">
-                <Outlet />
+                <Outlet/>
             </Container>
         </>
     );

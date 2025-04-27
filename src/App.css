@@ -1,6 +1,12 @@
 .App {
-  text-align: center;
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background: url('imgs/background.png') fixed center;
+  display: flex;
+  flex-direction: column;
 }
+
 
 .App-logo {
   height: 40vmin;

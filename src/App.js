@@ -42,9 +42,8 @@ function App() {
 
 
     return (
-        <>
+        <div className="App">
             <BrowserRouter>
-
                 <Routes>
                     <Route path="/" element={<Header/>}>
                         <Route index element={
@@ -63,7 +62,7 @@ function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
-        </>
+        </div>
     );
 }
 
