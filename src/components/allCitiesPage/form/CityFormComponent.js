@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CountriesDropdown from "./CountriesDropdown";
 import {
     validateCityName,
@@ -7,33 +7,44 @@ import {
     validateLongitude,
 } from './ValidateForm';
 
-function CityForm({ cities, setCities, setShowForm }) {
+function CityFormComponent({
+                               initialCity = {},
+                               cities = [],
+                               onSave,
+                               onCancel,
+                               isEditing = false
+                           }) {
 
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({
+        // name: '',
+        // country: '',
+        // latitude: '',
+        // longitude: '',
+        ...initialCity
+    });
     const [formValidity, setFormValidity] = useState({});
 
-    // const validators = {
-    //     name: value => value.trim() !== '',
-    //     country: value => value.trim() !== '',
-    //     latitude: value => !isNaN(value) && value >= -90 && value <= 90,
-    //     longitude: value => !isNaN(value) && value >= -180 && value <= 180,
-    // };
     const validators = {
-        name: value => validateCityName(value, cities),
+        name: value => validateCityName(value, cities, isEditing),
         country: validateCountry,
         latitude: validateLatitude,
         longitude: validateLongitude,
     };
 
+    // Initialize validation state when the form is mounted
+    useEffect(() => {
+        if (isEditing) {
+            const initialValidity = {};
+            for (const field in validators) {
+                initialValidity[field] = validators[field](formData[field] || "");
+            }
+            setFormValidity(initialValidity);
+        }
+    }, []);
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData( values => ({ ...values, [name]: value }))
-    //     handleValidate(name, value);
-    // };
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const trimmedValue = value.trimStart(); // optional but helps avoid leading spaces
+        const trimmedValue = value.trimStart();
         setFormData(values => ({ ...values, [name]: trimmedValue }));
         handleValidate(name, trimmedValue);
     };
@@ -60,32 +71,28 @@ function CityForm({ cities, setCities, setShowForm }) {
 
         if (!allValid) return; // prevent submission
 
-        setCities(prevCities => [...prevCities, formData]);
-        setShowForm(false);
-    };
-
-    const handleCancel = () => {
-        setShowForm(false);
+        onSave(formData);
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={isEditing ? "list-group-item" : ""}>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label">City Name</label>
                 <input
                     type="text"
                     className={`form-control ${
-                        formValidity.name === false ? 'is-invalid' : 
+                        formValidity.name === false ? 'is-invalid' :
                             formValidity.name === true ? 'is-valid' : ''
                     }`}
                     id="name"
                     name="name"
                     value={formData.name || ""}
                     onChange={handleChange}
+                    readOnly={isEditing} // Make name readonly when editing
                 />
                 {formValidity.name === false && (
                     <div className="invalid-feedback">
-                        Name must be unique and contain only letters
+                        "Name must be unique and contain only letters"
                     </div>
                 )}
             </div>
@@ -105,7 +112,7 @@ function CityForm({ cities, setCities, setShowForm }) {
                     <label htmlFor="latitude" className="form-label">Latitude</label>
                     <input
                         type="number"
-                        step="0.1"
+                        step="0.000001"
                         className={`form-control ${
                             formValidity.latitude === false ? 'is-invalid' :
                                 formValidity.latitude === true ? 'is-valid' : ''
@@ -126,7 +133,7 @@ function CityForm({ cities, setCities, setShowForm }) {
                     <label htmlFor="longitude" className="form-label">Longitude</label>
                     <input
                         type="number"
-                        step="0.1"
+                        step="0.000001"
                         className={`form-control ${
                             formValidity.longitude === false ? 'is-invalid' :
                                 formValidity.longitude === true ? 'is-valid' : ''
@@ -145,13 +152,13 @@ function CityForm({ cities, setCities, setShowForm }) {
             </div>
 
             <div className="d-flex gap-2">
-                <button type="submit" className="btn btn-primary">
-                    Add City
+                <button type="submit" className={`btn btn-primary ${isEditing ? 'btn-sm' : ''}`}>
+                    {isEditing ? 'Save' : 'Add City'}
                 </button>
                 <button
                     type="button"
-                    className="btn btn-secondary"
-                    onClick={handleCancel}
+                    className={`btn btn-secondary ${isEditing ? 'btn-sm' : ''}`}
+                    onClick={onCancel}
                 >
                     Cancel
                 </button>
@@ -160,4 +167,4 @@ function CityForm({ cities, setCities, setShowForm }) {
     );
 }
 
-export default CityForm;
+export default CityFormComponent;

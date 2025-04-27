@@ -1,5 +1,5 @@
 import CityRow from './CityRow';
-import CityEditForm from "./CityEditForm";
+import CityEditForm from "./form/CityEditForm";
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import {useState} from "react";
 
@@ -59,6 +59,8 @@ function CitiesList({ cities, setCities }) {
                             <CityEditForm
                                 key={city.name}
                                 city={city}
+                                cities = {cities}
+                                //cities = {[]}
                                 onSave={handleUpdateCity}
                                 onCancel={handleCancelEdit}
                             />
