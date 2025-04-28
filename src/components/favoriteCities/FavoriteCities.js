@@ -34,11 +34,13 @@ function FavoriteCities({cities}) {
     // Handle country selection
     const handleCountryChange = (e) => {
         setSelectedCountry(e.target.value);
+        setCityForecast(null);
     };
 
     // Reset country filter
     const handleReset = () => {
         setSelectedCountry('');
+        setCityForecast(null);
     };
 
     const handleShowForecast = (city) => {
