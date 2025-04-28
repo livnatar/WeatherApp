@@ -7,14 +7,14 @@ import CountryFilter from './CountryFilter'; // Import the separate filter compo
 import useDataApi from "./useDataApi";
 import ForecastTable from './ForecastTable';
 
-const FORECAST_SEARCH_URL = 'https://www.7timer.info/bin/api.pl?lon=';
-const FORECAST_SEARCH_DEFAULT = FORECAST_SEARCH_URL + 'useState';
+const FORECAST_SEARCH_URL = 'https://www.7timer.info/bin/api.pl?';
+const FORECAST_SEARCH_DEFAULT = 'https://www.7timer.info/bin/api.pl?lon=0&lat=0&product=civillight&output=json';
+const FORECAST_URL_ENDING = '&product=civillight&output=json';
 const FETCH_ERROR_MSG = 'Something went wrong ...';
 
 
 function FavoriteCities({cities}) {
     const [selectedCountry, setSelectedCountry] = useState('');
-    const [query, setQuery] = useState(''); // query string to be searched is a state
     const [{ data, isLoading, isError }, setUrlForFetch] = useDataApi(FORECAST_SEARCH_DEFAULT, { dataseries: [] });
     const [cityForecast, setCityForecast] = useState(null);
 
@@ -42,6 +42,9 @@ function FavoriteCities({cities}) {
     };
 
     const handleShowForecast = (city) => {
+        // Correctly format the URL by replacing the placeholders with actual values
+        const forecastUrl = `${FORECAST_SEARCH_URL}lon=${city.longitude}&lat=${city.latitude}${FORECAST_URL_ENDING}`;
+        setUrlForFetch(forecastUrl);
         setCityForecast(city);
     };
 
@@ -66,8 +69,12 @@ function FavoriteCities({cities}) {
                     {filteredCities.map(city => (
                         cityForecast?.name === city.name ? (
                             <ForecastTable
+                                key={city.name}
                                 city={city}
-                                data = {data}
+                                data={data}
+                                isLoading={isLoading}
+                                isError={isError}
+                                errorMessage={FETCH_ERROR_MSG}
                                 onClose={handleCloseForecast}
                               />
                             ):(
