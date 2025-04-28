@@ -4,9 +4,19 @@
  */
 import { useState } from 'react';
 import CountryFilter from './CountryFilter'; // Import the separate filter component
+import useDataApi from "./useDataApi";
+import ForecastTable from './ForecastTable';
+
+const FORECAST_SEARCH_URL = 'https://www.7timer.info/bin/api.pl?lon=';
+const FORECAST_SEARCH_DEFAULT = FORECAST_SEARCH_URL + 'useState';
+const FETCH_ERROR_MSG = 'Something went wrong ...';
+
 
 function FavoriteCities({cities}) {
     const [selectedCountry, setSelectedCountry] = useState('');
+    const [query, setQuery] = useState(''); // query string to be searched is a state
+    const [{ data, isLoading, isError }, setUrlForFetch] = useDataApi(FORECAST_SEARCH_DEFAULT, { dataseries: [] });
+    const [cityForecast, setCityForecast] = useState(null);
 
     // Get all favorite cities and sort them alphabetically by name
     const favoriteCities = cities
@@ -31,6 +41,14 @@ function FavoriteCities({cities}) {
         setSelectedCountry('');
     };
 
+    const handleShowForecast = (city) => {
+        setCityForecast(city);
+    };
+
+    const handleCloseForecast = () => {
+        setCityForecast(null);
+    };
+
     return (
         <div>
             <h1>Your Favorite Cities</h1>
@@ -46,14 +64,22 @@ function FavoriteCities({cities}) {
             {filteredCities.length > 0 ? (
                 <ul className="list-group mt-3">
                     {filteredCities.map(city => (
+                        cityForecast?.name === city.name ? (
+                            <ForecastTable
+                                city={city}
+                                data = {data}
+                                onClose={handleCloseForecast}
+                              />
+                            ):(
                         <li key={city.name} className="list-group-item d-flex justify-content-between align-items-center">
                             <span>
                                 <strong>{city.name}</strong>, {city.country}
                             </span>
-                            <button className="btn btn-outline-info btn-sm" onClick={() => alert(`Weather forecast for ${city.name} will be available soon!`)}>
+                            <button className="btn btn-outline-info btn-sm" onClick={() => handleShowForecast(city)}>
                                 Get Weather Forecast
                             </button>
                         </li>
+                        )
                     ))}
                 </ul>
             ) : (
