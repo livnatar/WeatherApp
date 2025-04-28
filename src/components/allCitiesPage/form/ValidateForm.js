@@ -1,7 +1,8 @@
 
-export const validateCityName = (value, cities, isEditing = false) => {
-    // If we're in edit mode, the name is valid (since it's read-only)
-    if (isEditing) return true;
+export const validateCityName = (value, cities, currentName= null) => {
+
+    // If we're in edit mode and the name hasn't changed, it's valid
+    if (currentName && value === currentName) return true;
 
     // Check if name is not empty and contains only letters
     const nameRegex = /^[a-zA-Z\s]+$/;

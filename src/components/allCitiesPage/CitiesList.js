@@ -5,12 +5,12 @@ import {useState} from "react";
 
 function CitiesList({ cities, setCities }) {
 
-    const [editingCityId, setEditingCityId] = useState(null);
+    const [editingCity, setEditingCity] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [cityToDelete, setCityToDelete] = useState(null);
 
-    const handleDeleteClick = (cityId) => {
-        setCityToDelete(cityId);
+    const handleDeleteClick = (cityName) => {
+        setCityToDelete(cityName);
         setShowDeleteModal(true);
     };
 
@@ -25,32 +25,32 @@ function CitiesList({ cities, setCities }) {
         setCityToDelete(null);
     };
 
-    const toggleFavorite = (cityId) => {
+    const toggleFavorite = (cityName) => {
         setCities(cities.map(city =>
-            city.name === cityId ? {...city, isFavorite: !city.isFavorite} : city
+            city.name === cityName ? {...city, isFavorite: !city.isFavorite} : city
         ));
     };
 
-    const handleEditCity = (cityName) => {
-        setEditingCityId(cityName);
+    const handleEditCity = (city) => {
+        setEditingCity(city);
     };
 
     const handleUpdateCity = (updatedCity) => {
         setCities(cities.map(city =>
-            city.name === updatedCity.name ? updatedCity : city
+            city.name === editingCity.name ? updatedCity : city
         ));
-        setEditingCityId(null); // Exit edit mode
+        setEditingCity(null);
     };
 
     const handleCancelEdit = () => {
-        setEditingCityId(null);
+        setEditingCity(null);
     };
     return (
         <div>
             {cities.length > 0 ? (
                 <div className="list-group">
                     {cities.map(city => (
-                        editingCityId === city.name ? (
+                        editingCity?.name === city.name ? (
                             <CityEditForm
                                 key={city.name}
                                 city={city}
@@ -62,7 +62,7 @@ function CitiesList({ cities, setCities }) {
                             <CityRow
                                 key={city.name}
                                 city={city}
-                                onEdit={() => handleEditCity(city.name)}
+                                onEdit={() => handleEditCity(city)}
                                 onDelete={() => handleDeleteClick(city.name)}
                                 onToggleFavorite={() => toggleFavorite(city.name)}
                             />

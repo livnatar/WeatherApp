@@ -25,7 +25,7 @@ function CityFormComponent({
     const [formValidity, setFormValidity] = useState({});
 
     const validators = {
-        name: value => validateCityName(value, cities, isEditing),
+        name: value => validateCityName(value, cities, isEditing ? initialCity.name : null),
         country: validateCountry,
         latitude: validateLatitude,
         longitude: validateLongitude,
@@ -88,11 +88,10 @@ function CityFormComponent({
                     name="name"
                     value={formData.name || ""}
                     onChange={handleChange}
-                    readOnly={isEditing} // Make name readonly when editing
                 />
                 {formValidity.name === false && (
                     <div className="invalid-feedback">
-                        "Name must be unique and contain only letters"
+                        Name must be unique and contain only letters
                     </div>
                 )}
             </div>

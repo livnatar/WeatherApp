@@ -26,7 +26,7 @@
  */
 function About() {
     return (
-        <div className="container-fluid">
+        <div>
             <h1>About the App</h1>
             <p>This is a simple React app we built to manage a list of cities and display 7-day weather forecasts using an external API.</p>
 

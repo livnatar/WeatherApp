@@ -14,7 +14,7 @@ export default function Header(props) {
             <NavigationBar/>
 
             {/* Content Area */}
-            <Container fluid className="mx-3 mt-3">
+            <Container fluid className="mx-3 mt-3 px-3">
                 <Outlet/>
             </Container>
         </>
