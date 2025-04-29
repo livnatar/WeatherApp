@@ -1,4 +1,3 @@
-// useFetchCountries.js
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -18,7 +17,7 @@ const useFetchCountries = () => {
                 setCountries(countriesData);
                 setLoading(false);
             } catch (err) {
-                setError('Failed to fetch countries');
+                setError('Failed to load countries');
                 setLoading(false);
             }
         };

@@ -1,9 +1,12 @@
-import {useState} from 'react';
 import useFetchCountries from './useFetchCountries';
 
+const COUNTRIES = ["Israel", "USA", "Canada", "France", "England"];
 
 function CountriesDropdown({ handleChange, value, isValid, id }) {
     const { countries, loading, error } = useFetchCountries();
+
+    // if fetch failed the dropdown will use the default COUNTRIES list
+    const displayedCountries = error ? COUNTRIES : countries;
 
     return (
         <div className="mb-2">
@@ -19,9 +22,9 @@ function CountriesDropdown({ handleChange, value, isValid, id }) {
                 disabled={loading}
             >
                 <option value="" disabled>
-                    {loading ? "Loading countries..." : error ? "Error loading countries" : "Select a country"}
+                    {loading ? "Loading countries..." : "Select a country"}
                 </option>
-                {countries.map(country => (
+                {displayedCountries.map(country => (
                     <option key={country} value={country}>
                         {country}
                     </option>
@@ -30,11 +33,6 @@ function CountriesDropdown({ handleChange, value, isValid, id }) {
             {isValid === false && (
                 <div className="invalid-feedback">
                     Please select a country
-                </div>
-            )}
-            {error && (
-                <div className="text-danger small">
-                    {error}. Using default list.
                 </div>
             )}
         </div>
