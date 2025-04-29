@@ -15,13 +15,7 @@ function CityFormComponent({
                                isEditing = false
                            }) {
 
-    const [formData, setFormData] = useState({
-        // name: '',
-        // country: '',
-        // latitude: '',
-        // longitude: '',
-        ...initialCity
-    });
+    const [formData, setFormData] = useState({...initialCity});
     const [formValidity, setFormValidity] = useState({});
 
     const validators = {

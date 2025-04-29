@@ -5,23 +5,24 @@ import NotFound from "./components/NotFound";
 import AllCities from "./components/allCitiesPage/AllCities";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
-import {useEffect, useState} from "react";
+import {useEffect, useReducer} from "react";
+import citiesReducer, { ACTION_TYPES } from "./citiesReducer";
 
 function App() {
 
-    // const [cities, setCities] = useState([]);
-    //
-    // // Load cities from localStorage on component mount
-    // useEffect(() => {
-    //     const savedCities = localStorage.getItem('weatherCities');
-    //     if (savedCities) {
-    //         setCities(JSON.parse(savedCities));
+    // // Initialize cities with an empty array - we'll load from localStorage first
+    // const [cities, setCities] = useState(() => {
+    //     // This function runs only once during initial render
+    //     try {
+    //         const savedCities = localStorage.getItem('weatherCities');
+    //         return savedCities ? JSON.parse(savedCities) : [];
+    //     } catch (error) {
+    //         console.error("Failed to load cities from localStorage:", error);
+    //         return [];
     //     }
-    // }, []);
-
-    // Initialize cities with an empty array - we'll load from localStorage first
-    const [cities, setCities] = useState(() => {
-        // This function runs only once during initial render
+    // });
+    // Initialize cities reducer with data from localStorage
+    const [cities, dispatch] = useReducer(citiesReducer, [], () => {
         try {
             const savedCities = localStorage.getItem('weatherCities');
             return savedCities ? JSON.parse(savedCities) : [];
@@ -40,6 +41,25 @@ function App() {
         }
     }, [cities]);
 
+    // Action creator functions
+    const addCity = (city) => {
+        dispatch({ type: ACTION_TYPES.ADD_CITY, payload: city });
+    };
+
+    const updateCity = (originalName, updatedCity) => {
+        dispatch({
+            type: ACTION_TYPES.UPDATE_CITY,
+            payload: { originalName, updatedCity }
+        });
+    };
+
+    const deleteCity = (cityName) => {
+        dispatch({ type: ACTION_TYPES.DELETE_CITY, payload: cityName });
+    };
+
+    const toggleFavorite = (cityName) => {
+        dispatch({ type: ACTION_TYPES.TOGGLE_FAVORITE, payload: cityName });
+    };
 
     return (
         <div className="App">
@@ -54,7 +74,10 @@ function App() {
                         <Route path="/AllCities" element={
                             <AllCities
                                 cities={cities}
-                                setCities={setCities}
+                                addCity={addCity}
+                                updateCity={updateCity}
+                                deleteCity={deleteCity}
+                                toggleFavorite={toggleFavorite}
                             />
                         }/>
                         <Route path="/About" element={<About/>}/>

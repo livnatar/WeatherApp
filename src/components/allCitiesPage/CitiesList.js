@@ -3,7 +3,7 @@ import CityEditForm from "./form/CityEditForm";
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import {useState} from "react";
 
-function CitiesList({ cities, setCities }) {
+function CitiesList({ cities, updateCity, deleteCity, toggleFavorite}) {
 
     const [editingCity, setEditingCity] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -20,15 +20,13 @@ function CitiesList({ cities, setCities }) {
     };
 
     const confirmDelete = () => {
-        setCities(cities.filter(city => city.name !== cityToDelete));
+        deleteCity(cityToDelete);
         setShowDeleteModal(false);
         setCityToDelete(null);
     };
 
-    const toggleFavorite = (cityName) => {
-        setCities(cities.map(city =>
-            city.name === cityName ? {...city, isFavorite: !city.isFavorite} : city
-        ));
+    const handleToggleFavorite = (cityName) => {
+        toggleFavorite(cityName);
     };
 
     const handleEditCity = (city) => {
@@ -36,9 +34,7 @@ function CitiesList({ cities, setCities }) {
     };
 
     const handleUpdateCity = (updatedCity) => {
-        setCities(cities.map(city =>
-            city.name === editingCity.name ? updatedCity : city
-        ));
+        updateCity(editingCity.name, updatedCity);
         setEditingCity(null);
     };
 
@@ -64,7 +60,7 @@ function CitiesList({ cities, setCities }) {
                                 city={city}
                                 onEdit={() => handleEditCity(city)}
                                 onDelete={() => handleDeleteClick(city.name)}
-                                onToggleFavorite={() => toggleFavorite(city.name)}
+                                onToggleFavorite={() => handleToggleFavorite(city.name)}
                             />
                         )
                     ))}

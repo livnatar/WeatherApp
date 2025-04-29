@@ -5,7 +5,7 @@ import CityForm from './form/CityForm';
 import AddCityButton from "./AddCityButton";
 
 
-function AllCities({cities, setCities}) {
+function AllCities({cities, addCity, updateCity, deleteCity, toggleFavorite}) {
 
     const [showForm, setShowForm] = useState(false);
 
@@ -16,7 +16,7 @@ function AllCities({cities, setCities}) {
             { showForm ? (
                 <CityForm
                     cities={cities}
-                    setCities={setCities}
+                    addCity={addCity}
                     setShowForm={setShowForm}
                 />
             ) : (
@@ -26,7 +26,9 @@ function AllCities({cities, setCities}) {
                     />
                     <CitiesList
                         cities={cities}
-                        setCities={setCities}
+                        updateCity={updateCity}
+                        deleteCity={deleteCity}
+                        toggleFavorite={toggleFavorite}
                     />
                 </>
             )}
