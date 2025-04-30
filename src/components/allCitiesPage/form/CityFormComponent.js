@@ -145,12 +145,12 @@ function CityFormComponent({
             </div>
 
             <div className="d-flex gap-2">
-                <button type="submit" className={`btn btn-primary ${isEditing ? 'btn-sm' : ''}`}>
+                <button type="submit" className={`btn btn-success ${isEditing ? 'btn-sm' : ''}`}>
                     {isEditing ? 'Save' : 'Add City'}
                 </button>
                 <button
                     type="button"
-                    className={`btn btn-secondary ${isEditing ? 'btn-sm' : ''}`}
+                    className={`btn btn-danger ${isEditing ? 'btn-sm' : ''}`}
                     onClick={onCancel}
                 >
                     Cancel

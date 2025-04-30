@@ -1,16 +1,15 @@
 
 import { Outlet } from "react-router";
-import AppTitle from './AppTitle';
+//import AppTitle from './AppTitle';
 import NavigationBar from './NavigationBar';
 import { Container } from 'react-bootstrap';
 
 export default function Header(props) {
     return (
         <>
-            {/* Title Row Component */}
-            <AppTitle/>
 
-            {/* Navigation Bar Component */}
+
+            {/* Combined NavBar with Title */}
             <NavigationBar/>
 
             {/* Content Area */}
@@ -20,3 +19,5 @@ export default function Header(props) {
         </>
     );
 }
+// {/* Title Row Component */}
+// <AppTitle/>
