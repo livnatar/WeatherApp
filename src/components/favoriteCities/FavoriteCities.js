@@ -79,7 +79,7 @@ function FavoriteCities({cities}) {
             </div>
 
             {filteredCities.length > 0 ? (
-                <div className="list-group shadow-sm">
+                <div className="list-group shadow-sm mb-3">
                     {filteredCities.map(city => (
                         cityForecast?.name === city.name ? (
                             <ForecastTable
