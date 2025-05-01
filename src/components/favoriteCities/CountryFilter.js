@@ -1,12 +1,18 @@
+
 /**
- * A component for filtering cities by country.
- * @param {string[]} countries - List of countries to display in the dropdown
- * @param {string} selectedCountry - Currently selected country
- * @param {function} onSelectCountry - Handler for country selection
- * @param {function} onReset - Handler for reset button click
- * @returns {JSX.Element}
+ * CountryFilter component allows users to filter a list of cities by country.
+ * Displays a dropdown with a list of countries and a reset button to clear the selection.
+ *
+ * @param {Object} props
+ * @param {string[]} props.countries - Array of unique country names to display in the dropdown.
+ * @param {string} props.selectedCountry - Currently selected country value.
+ * @param {function} props.onSelectCountry - Callback function to handle country selection change.
+ * @param {function} props.onReset - Callback function to reset the selected country.
+ * @returns {JSX.Element} A dropdown filter and a reset button.
+ * @constructor
  */
 function CountryFilter({ countries, selectedCountry, onSelectCountry, onReset }) {
+
     return (
         <div className="row mb-4 mt-3">
             <div className="col-auto">

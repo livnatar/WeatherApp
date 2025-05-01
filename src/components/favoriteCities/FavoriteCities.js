@@ -1,9 +1,6 @@
-/**
- * A component for displaying favorite cities with alphabetical sorting and country filtering.
- * @returns {JSX.Element}
- */
+
 import { useState } from 'react';
-import CountryFilter from './CountryFilter'; // Import the separate filter component
+import CountryFilter from './CountryFilter';
 import useDataApi from "./useDataApi";
 import ForecastTable from './ForecastTable';
 
@@ -12,43 +9,80 @@ const FORECAST_SEARCH_DEFAULT = 'https://www.7timer.info/bin/api.pl?lon=0&lat=0&
 const FORECAST_URL_ENDING = '&product=civillight&output=json';
 const FETCH_ERROR_MSG = 'Something went wrong ...';
 
+
+/**
+ * Component for displaying and managing favorite cities with weather forecasts.
+ * Allows filtering by country and shows a forecast when a city is selected.
+ *
+ * @param {Object[]} cities - List of all city objects including favorite status.
+ * @returns {JSX.Element} Rendered list and forecast view for favorite cities.
+ * @constructor
+ */
 function FavoriteCities({cities}) {
+
     const [selectedCountry, setSelectedCountry] = useState('');
     const [{ data, isLoading, isError }, setUrlForFetch] = useDataApi(FORECAST_SEARCH_DEFAULT, { dataseries: [] });
     const [cityForecast, setCityForecast] = useState(null);
 
-    // Get all favorite cities and sort them alphabetically by name
+    /**
+     * Filters the favorite cities and sorts them alphabetically by name.
+     *
+     * @type {Object[]} Filtered and sorted favorite cities.
+     */
     const favoriteCities = cities
         .filter(city => city.isFavorite)
         .sort((a, b) => a.name.localeCompare(b.name));
 
-    // Extract unique countries from favorite cities for dropdown
+    /**
+     * Extracts a list of unique countries from the favorite cities.
+     *
+     * @type {string[]} List of country names.
+     */
     const uniqueCountries = [...new Set(favoriteCities.map(city => city.country))];
 
-    // Filter cities by selected country
+    /**
+     * Filters the favorite cities by the selected country, or returns all if none selected.
+     *
+     * @type {Object[]} Filtered list of cities.
+     */
     const filteredCities = selectedCountry
         ? favoriteCities.filter(city => city.country === selectedCountry)
         : favoriteCities;
 
-    // Handle country selection
+    /**
+     * Handles the change in selected country from the dropdown.
+     * Clears the current forecast.
+     *
+     * @param e - The event object from the select input.
+     */
     const handleCountryChange = (e) => {
         setSelectedCountry(e.target.value);
         setCityForecast(null);
     };
 
-    // Reset country filter
+
+    /**
+     * Resets the selected country and clears the current forecast.
+     */
     const handleReset = () => {
         setSelectedCountry('');
         setCityForecast(null);
     };
 
+    /**
+     * Sets the selected city for showing forecast and updates API fetch URL.
+     *
+     * @param {Object} city - The city object selected by the user.
+     */
     const handleShowForecast = (city) => {
-        // Correctly format the URL by replacing the placeholders with actual values
         const forecastUrl = `${FORECAST_SEARCH_URL}lon=${city.longitude}&lat=${city.latitude}${FORECAST_URL_ENDING}`;
         setUrlForFetch(forecastUrl);
         setCityForecast(city);
     };
 
+    /**
+     * Clears the forecast view by deselecting the city.
+     */
     const handleCloseForecast = () => {
         setCityForecast(null);
     };

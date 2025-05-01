@@ -1,4 +1,26 @@
+
+
+/**
+ * Renders a 7-day weather forecast in a responsive Bootstrap grid layout.
+ *
+ * @param {Object} props - Component props.
+ * @param {{ name: string, country: string }} props.city - The selected city object.
+ * @param {{ dataseries: Array }} props.data - Weather forecast data for the city.
+ * @param {boolean} props.isLoading - Indicates if data is being loaded.
+ * @param {boolean} props.isError - Indicates if there was an error fetching data.
+ * @param {string} props.errorMessage - Error message to display if loading fails.
+ * @param {Function} props.onClose - Function to call when the user clicks the "Cancel" or close button.
+ * @returns {JSX.Element} Forecast display component or loading/error messages.
+ * @constructor
+ */
 function ForecastTable({ city, data, isLoading, isError, errorMessage, onClose }) {
+
+    /**
+     * Formats a numeric date (YYYYMMDD) into a readable form.
+     *
+     * @param {number} date - Date in YYYYMMDD format.
+     * @returns {{ dayName: string, formattedDate: string }} Formatted date with day name and DD/MM format.
+     */
     const formatDate = (date) => {
         const dateStr = date.toString();
         const year = dateStr.slice(0, 4);
@@ -12,7 +34,10 @@ function ForecastTable({ city, data, isLoading, isError, errorMessage, onClose }
         return { dayName, formattedDate: `${day}/${month}` };
     };
 
-    // Mapping the weather descriptions to Bootstrap icons
+    /**
+     * Mapping the weather descriptions to Bootstrap icons
+     * @type {{rain: string, rainsnow: string, lightrain: string, oshower: string, clear: string, ishower: string, mcloudy: string, tsrain: string, windy: string, cloudy: string, lightsnow: string, snow: string, pcloudy: string, fog: string, ts: string}}
+     */
     const weatherIcons = {
         "clear": "bi-sun",                      // ☀️
         "pcloudy": "bi-cloud-sun",              // 🌤️
@@ -31,7 +56,10 @@ function ForecastTable({ city, data, isLoading, isError, errorMessage, onClose }
         "windy": "bi-wind",                     // 🌬️
     };
 
-    // Weather code to readable text mapping
+    /**
+     * Weather code to readable text mapping
+     * @type {{rain: string, rainsnow: string, lightrain: string, oshower: string, clear: string, ishower: string, mcloudy: string, tsrain: string, windy: string, cloudy: string, lightsnow: string, snow: string, pcloudy: string, fog: string, ts: string}}
+     */
     const weatherText = {
         "clear": "Clear",
         "pcloudy": "Partly Cloudy",
@@ -50,11 +78,23 @@ function ForecastTable({ city, data, isLoading, isError, errorMessage, onClose }
         "windy": "Windy"
     };
 
+    /**
+     * Returns an icon element based on a weather code.
+     *
+     * @param {string} weatherCode - Code representing the weather type.
+     * @returns {JSX.Element} Bootstrap icon for the weather.
+     */
     const getWeatherIcon = (weatherCode) => {
         const iconClass = weatherIcons[weatherCode] || "bi-question-circle"; // fallback if no match
         return <i className={`bi ${iconClass}`}></i>;
     };
 
+    /**
+     * Converts weather code to readable text.
+     *
+     * @param {string} weatherCode - Code representing the weather.
+     * @returns {string} Human-readable weather description.
+     */
     const getWeatherText = (weatherCode) => {
         return weatherText[weatherCode] || weatherCode;
     };
