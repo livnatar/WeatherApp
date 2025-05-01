@@ -2,6 +2,17 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
+/**
+ * DeleteConfirmationModal displays a modal dialog asking the user to confirm deletion of a city.
+ *
+ * @param {Object} props
+ * @param {boolean} props.show - Whether the modal is visible.
+ * @param {string} props.cityName - Name of the city to show in the confirmation message.
+ * @param {function} props.onClose - Callback to close the modal without deleting.
+ * @param {function} props.onConfirm - Callback to confirm and proceed with deletion.
+ * @returns {JSX.Element} The modal confirmation dialog.
+ * @constructor
+ */
 const DeleteConfirmationModal = ({ show, cityName, onClose, onConfirm }) => {
     return (
         <Modal show={show} onHide={onClose}>

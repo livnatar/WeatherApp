@@ -1,6 +1,13 @@
+
 /**
- * A modern city row component using only Bootstrap classes.
- * @returns {JSX.Element}
+ * CityRow renders a single row in the city list with details and action buttons.
+ *
+ * @param {Object} props
+ * @param {Object} props.city - The city object containing name, country, coordinates, and favorite status.
+ * @param {function} props.onEdit - Callback to trigger editing the city.
+ * @param {function} props.onDelete - Callback to trigger deleting the city.
+ * @param {function} props.onToggleFavorite - Callback to toggle the city’s favorite status.
+ * @returns {JSX.Element} A styled row showing city details and action buttons.
  * @constructor
  */
 function CityRow({ city, onEdit, onDelete, onToggleFavorite }) {

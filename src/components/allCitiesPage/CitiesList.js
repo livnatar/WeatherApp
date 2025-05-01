@@ -3,44 +3,86 @@ import CityEditForm from "./form/CityEditForm";
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import {useState} from "react";
 
+/**
+ * CitiesList component displays a list of cities with edit, delete, and favorite toggling options.
+ * It supports inline editing and shows a confirmation modal before deletion.
+ *
+ * @param {Object} props
+ * @param {Array<Object>} props.cities - List of city objects to render.
+ * @param {function} props.updateCity - Callback to update a city's details.
+ * @param {function} props.deleteCity - Callback to delete a city.
+ * @param {function} props.toggleFavorite - Callback to toggle a city's favorite status.
+ * @returns {JSX.Element} A list of cities with actions.
+ * @constructor
+ */
 function CitiesList({ cities, updateCity, deleteCity, toggleFavorite}) {
 
     const [editingCity, setEditingCity] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [cityToDelete, setCityToDelete] = useState(null);
 
+    /**
+     * Opens the delete confirmation modal for a specific city.
+     *
+     * @param {string} cityName - Name of the city to delete.
+     */
     const handleDeleteClick = (cityName) => {
         setCityToDelete(cityName);
         setShowDeleteModal(true);
     };
 
+    /**
+     * Closes the delete confirmation modal and clears the selected city.
+     */
     const handleCloseDeleteModal = () => {
         setShowDeleteModal(false);
         setCityToDelete(null);
     };
 
+    /**
+     * Confirms deletion of the selected city.
+     */
     const confirmDelete = () => {
         deleteCity(cityToDelete);
         setShowDeleteModal(false);
         setCityToDelete(null);
     };
 
+    /**
+     * Toggles the favorite status of a city.
+     *
+     * @param {string} cityName - Name of the city to toggle favorite.
+     */
     const handleToggleFavorite = (cityName) => {
         toggleFavorite(cityName);
     };
 
+    /**
+     * Sets a city for editing.
+     *
+     * @param {Object} city - City object to be edited.
+     */
     const handleEditCity = (city) => {
         setEditingCity(city);
     };
 
+    /**
+     * Handles the update of a city's information.
+     *
+     * @param {Object} updatedCity - Updated city data.
+     */
     const handleUpdateCity = (updatedCity) => {
         updateCity(editingCity.name, updatedCity);
         setEditingCity(null);
     };
 
+    /**
+     * Cancels the editing mode.
+     */
     const handleCancelEdit = () => {
         setEditingCity(null);
     };
+
     return (
         <div>
             {cities.length > 0 ? (
