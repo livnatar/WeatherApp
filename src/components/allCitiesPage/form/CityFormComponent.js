@@ -1,23 +1,29 @@
 import { useState, useEffect } from 'react';
 import CountriesDropdown from "./CountriesDropdown";
-import {
-    validateCityName,
-    validateCountry,
-    validateLatitude,
-    validateLongitude,
-} from './ValidateForm';
+import { validateCityName, validateCountry, validateLatitude, validateLongitude } from './ValidateForm';
 
-function CityFormComponent({
-                               initialCity = {},
-                               cities = [],
-                               onSave,
-                               onCancel,
-                               isEditing = false
-                           }) {
+
+/**
+ * CityFormComponent is a reusable form component for creating or editing a city.
+ *
+ * @param {Object} props
+ * @param {Object} [props.initialCity={}] - The initial city data for editing.
+ * @param {Array<Object>} [props.cities=[]] - The list of all existing cities (used for validation).
+ * @param {Function} props.onSave - Callback to save the form data.
+ * @param {Function} props.onCancel - Callback to cancel the form.
+ * @param {boolean} [props.isEditing=false] - Indicates whether the form is in edit mode.
+ * @returns {JSX.Element} The form component for adding or editing a city.
+ * @constructor
+ */
+function CityFormComponent({ initialCity = {}, cities = [], onSave, onCancel, isEditing = false}) {
 
     const [formData, setFormData] = useState({...initialCity});
     const [formValidity, setFormValidity] = useState({});
 
+    /**
+     * Validators for each field in the form.
+     * @type {{country: ((function(*): boolean)|*), latitude: ((function(*): *)|*), name: (function(*): boolean|*), longitude: ((function(*): *)|*)}}
+     */
     const validators = {
         name: value => validateCityName(value, cities, isEditing ? initialCity.name : null),
         country: validateCountry,
@@ -36,6 +42,11 @@ function CityFormComponent({
         }
     }, []);
 
+    /**
+     * Handles changes in input fields and triggers validation.
+     *
+     * @param e
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
         const trimmedValue = value.trimStart();
@@ -43,11 +54,22 @@ function CityFormComponent({
         handleValidate(name, trimmedValue);
     };
 
+    /**
+     * Validates a specific form field and updates its validity state.
+     *
+     * @param {string} name - Field name.
+     * @param {string} value - Field value.
+     */
     const handleValidate = (name, value) => {
         const isValid = validators[name]?.(value);
         setFormValidity(errors => ({ ...errors, [name]: isValid }));
     };
 
+    /**
+     * Handles form submission: validates all fields and invokes `onSave` if valid.
+     *
+     * @param e
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
 
