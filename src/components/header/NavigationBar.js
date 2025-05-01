@@ -2,6 +2,20 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../../imgs/logo.png';
 
+/**
+ * Renders the main navigation bar for the Weather App.
+ *
+ * This component uses React Bootstrap for layout and styling, and
+ * React Router's `Link` to navigate between different pages.
+ * It includes the app's logo, title, and navigation links to:
+ * - Favorite Cities
+ * - All Cities
+ * - About
+ *
+ * @component
+ * @returns {JSX.Element} The navigation bar with routing links and branding.
+ * @constructor
+ */
 export default function NavigationBar() {
     return (
         <Navbar expand="lg" bg="white" className="py-3 border-bottom">

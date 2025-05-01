@@ -1,6 +1,14 @@
 
 import React from "react";
 
+/**
+ * The About page component that describes the features and purpose of the app.
+ * It includes a list of capabilities and credits the creators.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered About page.
+ * @constructor
+ */
 function About() {
     return (
         <div className="container my-5">
