@@ -1,6 +1,5 @@
 
 import { Outlet } from "react-router";
-//import AppTitle from './AppTitle';
 import NavigationBar from './NavigationBar';
 import { Container } from 'react-bootstrap';
 
@@ -29,5 +28,3 @@ export default function Header(props) {
         </>
     );
 }
-// {/* Title Row Component */}
-// <AppTitle/>
