@@ -104,6 +104,7 @@ function CityFormComponent({ initialCity = {}, cities = [], onSave, onCancel, is
                     name="name"
                     value={formData.name || ""}
                     onChange={handleChange}
+                    autocomplete="name"
                 />
                 {formValidity.name === false && (
                     <div className="invalid-feedback">

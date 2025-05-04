@@ -17,9 +17,12 @@ function CountryFilter({ countries, selectedCountry, onSelectCountry, onReset })
         <div className="row">
             <div className="col-auto">
                 <select
+                    id="country-select"
+                    name="country"
                     className="form-select rounded-pill"
                     value={selectedCountry}
                     onChange={onSelectCountry}
+                    autoComplete="country"
                 >
                     <option value="">All Countries</option>
                     {countries.map(country => (
