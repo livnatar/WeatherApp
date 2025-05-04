@@ -40,7 +40,7 @@ function CountriesDropdown({ handleChange, value, isValid, id }) {
                 value={value || ""}
                 onChange={handleChange}
                 disabled={loading}
-                autocomplete="country"
+                autoComplete="country"
             >
                 <option value="" disabled>
                     {loading ? "Loading countries..." : "Select a country"}
