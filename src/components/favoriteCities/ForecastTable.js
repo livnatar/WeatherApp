@@ -26,7 +26,7 @@ function ForecastTable({ city, data, isLoading, isError, errorMessage, onClose }
         const month = dateStr.slice(4, 6);
         const day = dateStr.slice(6, 8);
 
-        // Get full weekday name (Monday, Tuesday, etc.)
+        // Get full weekday name
         const dateObj = new Date(`${year}-${month}-${day}`);
         const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'long' });
 
@@ -148,7 +148,6 @@ function ForecastTable({ city, data, isLoading, isError, errorMessage, onClose }
                 </button>
             </div>
 
-            {/* Use row-cols-7 to ensure all cards in one row with equal width */}
             <div className="row row-cols-7 g-2 pb-4">
                 {data.dataseries.slice(0, 7).map((day, index) => {
                     const { dayName, formattedDate } = formatDate(day.date);

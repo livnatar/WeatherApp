@@ -11,11 +11,10 @@ import { Container } from 'react-bootstrap';
  * and Bootstrap's `<Container />` for layout styling.
  *
  * @component
- * @param {Object} props - React props (currently unused).
  * @returns {JSX.Element} The header layout including the navigation bar and routed content.
  * @constructor
  */
-export default function Header(props) {
+export default function Header() {
     return (
         <>
             {/* Combined NavBar with Title */}

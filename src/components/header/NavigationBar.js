@@ -23,7 +23,7 @@ export default function NavigationBar() {
         <Navbar expand="lg" bg="white" className="py-3 border-bottom">
             <Container fluid className="px-4">
                 <div className="d-flex align-items-center">
-                    <img src={logo} alt="Logo" width="50" height="50" className="me-2" />
+                    <img src={`${logo}`} alt="Logo" width="50" height="50" className="me-2" />`
                     <h1 className="h5 text-dark mb-0">
                         <i className="fa fa-book-reader me-2"></i>Weather App
                     </h1>
