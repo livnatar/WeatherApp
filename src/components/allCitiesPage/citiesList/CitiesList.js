@@ -1,5 +1,5 @@
 import CityRow from './CityRow';
-import CityEditForm from "./form/CityEditForm";
+import CityEditForm from "../form/CityEditForm";
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import {useState} from "react";
 

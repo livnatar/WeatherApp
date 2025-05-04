@@ -1,6 +1,6 @@
 
 import {useState} from 'react';
-import CitiesList from './CitiesList';
+import CitiesList from './citiesList/CitiesList';
 import CityForm from './form/CityForm';
 import AddCityButton from "./AddCityButton";
 
