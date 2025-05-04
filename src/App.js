@@ -6,7 +6,7 @@ import AllCities from "./components/allCitiesPage/AllCities";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import {useEffect, useReducer} from "react";
-import citiesReducer, { ACTION_TYPES } from "./citiesReducer";
+import citiesReducer, { ACTION_TYPES } from "./customHooks/citiesReducer";
 
 /**
  * Root component of the application.

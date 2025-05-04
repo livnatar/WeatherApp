@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import CountriesDropdown from "./CountriesDropdown";
-import { validateCityName, validateCountry, validateLatitude, validateLongitude } from './ValidateForm';
+import { validateCityName, validateCountry, validateLatitude, validateLongitude } from '../../../utils/ValidateForm';
 
 
 /**

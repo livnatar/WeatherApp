@@ -1,4 +1,4 @@
-import useFetchCountries from './useFetchCountries';
+import useFetchCountries from '../../../customHooks/useFetchCountries';
 
 /**
  * Fallback list of countries in case fetching fails.

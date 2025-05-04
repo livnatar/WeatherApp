@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import CountryFilter from './CountryFilter';
-import useDataApi from "../useDataApi";
+import useDataApi from "../../customHooks/useDataApi";
 import ForecastTable from './ForecastTable';
 
 const FORECAST_SEARCH_URL = 'https://www.7timer.info/bin/api.pl?';

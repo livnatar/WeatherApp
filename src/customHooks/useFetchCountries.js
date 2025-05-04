@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useDataApi from '../../useDataApi'; // Import your existing hook
+import useDataApi from './useDataApi'; // Import your existing hook
 
 /**
  * Custom hook to fetch a list of countries from the Nobel Prize API.
