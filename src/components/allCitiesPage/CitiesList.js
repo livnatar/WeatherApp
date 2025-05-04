@@ -84,7 +84,7 @@ function CitiesList({ cities, updateCity, deleteCity, toggleFavorite}) {
     };
 
     return (
-        <div>
+        <div className="mb-5">
             {cities.length > 0 ? (
                 <div className="list-group">
                     {cities.map(city => (
@@ -108,7 +108,12 @@ function CitiesList({ cities, updateCity, deleteCity, toggleFavorite}) {
                     ))}
                 </div>
             ) : (
-                <p>No cities added yet. Add your first city!</p>
+                <div className="alert alert-info bg-light border-info d-flex align-items-center">
+                    <i className="bi bi-info-circle me-3 fs-4"></i>
+                    <p className="mb-0">
+                        No cities added yet, add your first city!
+                    </p>
+                </div>
             )}
 
             <DeleteConfirmationModal

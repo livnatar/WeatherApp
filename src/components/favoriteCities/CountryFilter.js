@@ -14,7 +14,7 @@
 function CountryFilter({ countries, selectedCountry, onSelectCountry, onReset }) {
 
     return (
-        <div className="row mb-4 mt-3">
+        <div className="row">
             <div className="col-auto">
                 <select
                     className="form-select rounded-pill"
@@ -27,7 +27,7 @@ function CountryFilter({ countries, selectedCountry, onSelectCountry, onReset })
                     ))}
                 </select>
             </div>
-            <div className="col-auto">
+            <div className="col-12 col-sm-auto mt-2 mt-sm-0">
                 <button
                     className="btn btn-outline-secondary"
                     onClick={onReset}

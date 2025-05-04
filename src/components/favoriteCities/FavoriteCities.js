@@ -60,7 +60,6 @@ function FavoriteCities({cities}) {
         setCityForecast(null);
     };
 
-
     /**
      * Resets the selected country and clears the current forecast.
      */
@@ -113,7 +112,7 @@ function FavoriteCities({cities}) {
             </div>
 
             {filteredCities.length > 0 ? (
-                <div className="list-group shadow-sm mb-3">
+                <div className="list-group shadow-sm mb-5">
                     {filteredCities.map(city => (
                         cityForecast?.name === city.name ? (
                             <ForecastTable
@@ -127,8 +126,8 @@ function FavoriteCities({cities}) {
                             />
                         ) : (
                             <div key={city.name} className="list-group-item border-start-0 border-end-0 p-3">
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <div>
+                                <div className="d-flex justify-content-between align-items-center flex-wrap">
+                                    <div className="mb-2 mb-md-0">
                                         <div className="d-flex align-items-center">
                                             <i className="bi bi-geo-alt-fill text-primary me-2"></i>
                                             <h5 className="mb-0 fw-bold">{city.name},</h5>
@@ -155,7 +154,7 @@ function FavoriteCities({cities}) {
                 <div className="alert alert-info bg-light border-info d-flex align-items-center">
                     <i className="bi bi-info-circle me-3 fs-4"></i>
                     <p className="mb-0">
-                        No favorite cities yet. Add some in the All Cities section!
+                        No favorite cities yet, add some in the All Cities page!
                     </p>
                 </div>
             )}
