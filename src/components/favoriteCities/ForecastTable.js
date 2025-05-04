@@ -35,36 +35,37 @@ function ForecastTable({ city, data, isLoading, isError, errorMessage, onClose }
 
     /**
      * Mapping the weather descriptions to Bootstrap icons
-     * @type {{rain: string, rainsnow: string, lightrain: string, oshower: string, clear: string, ishower: string, mcloudy: string, tsrain: string, windy: string, cloudy: string, lightsnow: string, snow: string, pcloudy: string, fog: string, ts: string}}
+     * @type {{[key: string]: string}}
      */
     const weatherIcons = {
-        "clear": "bi-sun",                      // ☀️
-        "pcloudy": "bi-cloud-sun",              // 🌤️
-        "mcloudy": "bi-cloud",                  // ☁️
-        "cloudy": "bi-clouds",                  // ☁️☁️
-        "fog": "bi-cloud-fog2",                 // 🌫️
-        "lightrain": "bi-cloud-drizzle",        // 🌦️
-        "oshower": "bi-cloud-drizzle",          // 🌦️
-        "ishower": "bi-cloud-drizzle",          // 🌦️
-        "lightsnow": "bi-snow",                 // ❄️
-        "rain": "bi-cloud-rain",                // 🌧️
-        "snow": "bi-snow",                      // ❄️
-        "rainsnow": "bi-cloud-sleet",           // 🌨️
-        "ts": "bi-cloud-lightning",             // ⛈️
-        "tsrain": "bi-cloud-lightning-rain",    // ⛈️🌧️
-        "windy": "bi-wind",                     // 🌬️
+        "clear": "bi-sun",
+        "pcloudy": "bi-cloud-sun",
+        "mcloudy": "bi-cloud",
+        "cloudy": "bi-clouds",
+        "humid": "bi-droplet",
+        "lightrain": "bi-cloud-drizzle",
+        "oshower": "bi-cloud-drizzle",
+        "ishower": "bi-cloud-drizzle",
+        "lightsnow": "bi-snow",
+        "rain": "bi-cloud-rain",
+        "snow": "bi-snow",
+        "rainsnow": "bi-cloud-sleet",
+        "ts": "bi-cloud-lightning",
+        "tsrain": "bi-cloud-lightning-rain",
+        "fog": "bi-cloud-fog2",
+        "windy": "bi-wind"
     };
 
     /**
      * Weather code to readable text mapping
-     * @type {{rain: string, rainsnow: string, lightrain: string, oshower: string, clear: string, ishower: string, mcloudy: string, tsrain: string, windy: string, cloudy: string, lightsnow: string, snow: string, pcloudy: string, fog: string, ts: string}}
+     * @type {{[key: string]: string}}
      */
     const weatherText = {
         "clear": "Clear",
         "pcloudy": "Partly Cloudy",
         "mcloudy": "Mostly Cloudy",
         "cloudy": "Cloudy",
-        "fog": "Foggy",
+        "humid": "Humid",
         "lightrain": "Light Rain",
         "oshower": "Occasional Showers",
         "ishower": "Isolated Showers",
@@ -72,8 +73,9 @@ function ForecastTable({ city, data, isLoading, isError, errorMessage, onClose }
         "rain": "Rain",
         "snow": "Snow",
         "rainsnow": "Rain and Snow",
-        "ts": "Thunderstorm Possible",
-        "tsrain": "Thunderstorm",
+        "ts": "Thunderstorm",
+        "tsrain": "Thunderstorm with Rain",
+        "fog": "Foggy",
         "windy": "Windy"
     };
 

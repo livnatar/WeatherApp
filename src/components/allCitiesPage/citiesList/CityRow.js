@@ -19,7 +19,6 @@ function CityRow({ city, onEdit, onDelete, onToggleFavorite }) {
                         <button
                             className={`btn ${city.isFavorite ? 'btn-warning' : 'btn-outline-warning'} me-3 rounded-circle p-2`}
                             onClick={onToggleFavorite}
-                            aria-label={city.isFavorite ? "Remove from favorites" : "Add to favorites"}
                         >
                             <i className="bi bi-star-fill"></i>
                         </button>
@@ -41,7 +40,6 @@ function CityRow({ city, onEdit, onDelete, onToggleFavorite }) {
                             onClick={onEdit}
                         >
                             <i className="bi bi-pencil-square"></i>
-                            <span className="d-none d-md-inline"></span>
                         </button>
 
                         <button
@@ -49,7 +47,6 @@ function CityRow({ city, onEdit, onDelete, onToggleFavorite }) {
                             onClick={onDelete}
                         >
                             <i className="bi bi-trash"></i>
-                            <span className="d-none d-md-inline"></span>
                         </button>
                     </div>
                 </div>
