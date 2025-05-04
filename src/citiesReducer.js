@@ -1,6 +1,4 @@
 
-export const initialState = [];
-
 /**
  * Enum-like object containing all possible action types
  * that can be dispatched to the cities reducer.
